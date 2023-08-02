@@ -1,0 +1,72 @@
+#include <bits/stdc++.h> 
+class Stack {
+    queue<int>q1;
+    queue<int>q2;
+
+   public:
+    Stack() {
+        // Implement the Constructor.
+    }
+
+    /*----------------- Public Functions of Stack -----------------*/
+
+    int getSize() {
+        return q1.size()+q2.size();
+    }
+
+    bool isEmpty() {
+        return (q1.size()+q2.size()==0)?true:false;;
+    }
+
+    void push(int element) {
+        q2.push(element);
+    }
+
+    int pop() {
+        if(q1.size() +q2.size()==0)return -1;
+        while(q2.size()>1)
+        {
+            q1.push(q2.front());
+            q2.pop();
+        }
+        int temp;
+        if(q2.size()==1)
+        {
+            temp=q2.front();
+            q2.pop();
+            
+        }
+        while(q1.size()!=0)
+        {
+            q2.push(q1.front());
+            q1.pop();
+        }
+        
+         return temp;
+    }
+
+    int top() {
+         if(q1.size() +q2.size()==0)return -1;
+        while(q2.size()>1)
+        {
+            q1.push(q2.front());
+            q2.pop();
+        }
+        int temp;
+        if(q2.size()==1)
+        {
+            temp=q2.front();
+            q1.push(temp);
+            q2.pop();
+            
+        }
+        while(q1.size()!=0)
+        {
+            q2.push(q1.front());
+            q1.pop();
+        }
+        
+         return temp;
+
+    }
+};

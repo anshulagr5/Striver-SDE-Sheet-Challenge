@@ -1,0 +1,28 @@
+#include <bits/stdc++.h> 
+
+bool static compare(pair<int,int>&a,pair<int,int>&b)
+{
+    return a.second*b.first>a.first*b.second;
+}
+
+double maximumValue (vector<pair<int, int>>& items, int n, int w)
+{
+    sort(items.begin(),items.end(),compare);// sort the items according to ratio (value/weight)
+    double value=0;
+    int i=0;
+    while(i<n && w>0)
+    {
+      if (w >= items[i].first) {
+        value += (double)items[i].second;
+        w = w - items[i].first;
+      }
+      else{
+         double temp=(double)items[i].second/(double)items[i].first;
+         temp=temp*(double)w;
+         value+=temp;
+         w=0;
+      }
+      i++;
+    }
+    return value;
+}
